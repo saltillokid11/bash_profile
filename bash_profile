@@ -1,4 +1,4 @@
-img# Configuring Our Prompt
+# Configuring Our Prompt
 # ======================
 
   # if you install git via homebrew, or install the bash autocompletion via homebrew, you get __git_ps1 which you can use in the PS1
@@ -105,9 +105,39 @@ img# Configuring Our Prompt
 # Helpful Functions
 # =====================
 
-# A function to CD into the desktop from anywhere
-# so you just type desktop.
-# HINT: It uses the built in USER variable to know your OS X username
+
+makeBBP() {
+   local blippName=$1;
+   if [[ -z $blippName ]]; then
+       blippName="main";
+   fi
+   mkdir -p $blippName/{assets/$blippName/_src/library,assets/$blippName/_src/exports,assets/$blippName/_src/includes,markers,xml,src};
+   touch $blippName/assets/$blippName/_src/$blippName.blp;
+   touch $blippName/assets/$blippName/_src/includes/actions.inc.blp;
+   touch $blippName/assets/$blippName/_src/includes/animations.inc.blp;
+   touch $blippName/assets/$blippName/_src/includes/classes.inc.blp;
+   touch $blippName/assets/$blippName/_src/includes/functions.inc.blp;
+   touch $blippName/assets/$blippName/_src/includes/lights.inc.blp;
+   touch $blippName/assets/$blippName/_src/includes/materials.inc.blp;
+   touch $blippName/assets/$blippName/_src/includes/models.inc.blp;
+}
+
+makeBlipp() {
+   local blippName=$1;
+   if [[ -z $blippName ]]; then
+       blippName="main";
+   fi
+   mkdir -p $blippName/markers;
+   mkdir -p $blippName/blipp/{assets,javascript};
+   cp /Users/tanner/BLP_JS_TEMPLATE/package.json $blippName/blipp/javascript/package.json
+   cp /Users/tanner/BLP_JS_TEMPLATE/main.js $blippName/blipp/javascript/main.js
+   cp /Users/tanner/BLP_JS_TEMPLATE/utils.js $blippName/blipp/javascript/utils.js
+}
+
+boxx() {
+cd ~/Box\ Sync/Global\ Departments/Delivery/Dev\ Projects/tanner/
+pwd
+}
 
 # USE: desktop
 #      desktop subfolder
@@ -198,5 +228,3 @@ export PATH=/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH
   unset file
 # export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-source ~/.profile
-
