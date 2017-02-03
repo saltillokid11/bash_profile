@@ -32,6 +32,11 @@
       "https://learn.co/admin/impersonations/users/$1"
     }
 
+   function bdev {
+   /usr/bin/open -a "/Applications/Google Chrome.app"
+   "https://developer.blippar.com/portal/documentation/$1"
+    }
+
   # Finally call the function and our prompt is all pretty
   prompt
 
@@ -180,6 +185,7 @@ function extract () {
 # =====================
   # LS
   alias l='ls -lah'
+  alias lsp='sudo lsof -i -n -P | grep LISTEN'
 
   # Git
   alias gcl="git clone"
@@ -228,3 +234,7 @@ export PATH=/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH
   unset file
 # export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+
+
+# // IMGCAT ////////////////////////
