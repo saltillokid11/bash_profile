@@ -1,65 +1,12 @@
-# Configuring Our Prompt
-# ======================
-
-  # if you install git via homebrew, or install the bash autocompletion via homebrew, you get __git_ps1 which you can use in the PS1
-  # to display the git branch.  it's supposedly a bit faster and cleaner than manually parsing through sed. i dont' know if you care
-  # enough to change it
-
-  # This function is called in your prompt to output your active git branch.
-  function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-  }
-
-  # This function builds your prompt. It is called below
-  function prompt {
-    # Define some local colors
-    local         RED="\[\033[0;31m\]" # This syntax is some weird bash color thing I never
-    local   LIGHT_RED="\[\033[1;31m\]" # really understood
-    local        CHAR="♥"
-    local   BLUE="\[\e[0;49;34m\]"
-
-    # ♥ ☆ - Keeping some cool ASCII Characters for reference
-
-    # Here is where we actually export the PS1 Variable which stores the text for your prompt
-    export PS1="\[\e]2;\u@\h\a[\[\e[37;44;1m\]\t\[\e[0m\]]$RED\$(parse_git_branch) \[\e[32m\]\W\[\e[0m\]\n\[\e[0;31m\]$BLUE//$RED $CHAR \[\e[0m\]"
-      PS2='> '
-      PS4='+ '
-    }
-
-# Impersonate Users
-    function imp {
-      /usr/bin/open -a "/Applications/Google Chrome.app"
-      "https://learn.co/admin/impersonations/users/$1"
-    }
-
-   function bdev {
-   /usr/bin/open -a "/Applications/Google Chrome.app"
-   "https://developer.blippar.com/portal/documentation/$1"
-    }
-
-  # Finally call the function and our prompt is all pretty
-  prompt
-
-  # For more prompt coolness, check out Halloween Bash:
-  # http://xta.github.io/HalloweenBash/
-
-  # If you break your prompt, just delete the last thing you did.
-  # And that's why it's good to keep your dotfiles in git too.
+# For more prompt coolness, check out Halloween Bash:
+# http://xta.github.io/HalloweenBash/
 
 # Environment Variables
 # =====================
   # Library Paths
-  # These variables tell your shell where they can find certain
-  # required libraries so other programs can reliably call the variable name
-  # instead of a hardcoded path.
 
     # NODE_PATH
-    # Node Path from Homebrew I believe
     export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
-
-    # Those NODE & Python Paths won't break anything even if you
-    # don't have NODE or Python installed. Eventually you will and
-    # then you don't have to update your bash_profile
 
   # Configurations
 
@@ -80,26 +27,8 @@
     export FLATIRON_VERSION='1.1.1'
   # Paths
 
-    # The USR_PATHS variable will just store all relevant /usr paths for easier usage
-    # Each path is seperate via a : and we always use absolute paths.
-
-    # A bit about the /usr directory
-    # The /usr directory is a convention from linux that creates a common place to put
-    # files and executables that the entire system needs access too. It tries to be user
-    # independent, so whichever user is logged in should have permissions to the /usr directory.
-    # We call that /usr/local. Within /usr/local, there is a bin directory for actually
-    # storing the binaries (programs) that our system would want.
-    # Also, Homebrew adopts this convetion so things installed via Homebrew
-    # get symlinked into /usr/local
     export USR_PATHS="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin"
 
-    # Hint: You can interpolate a variable into a string by using the $VARIABLE notation as below.
-
-    # We build our final PATH by combining the variables defined above
-    # along with any previous values in the PATH variable.
-
-    # Our PATH variable is special and very important. Whenever we type a command into our shell,
-    # it will try to find that command within a directory that is defined in our PATH.
     # Read http://blog.seldomatt.com/blog/2012/10/08/bash-and-the-one-true-path/ for more on that.
     export PATH="$USR_PATHS:$PATH"
 
@@ -140,23 +69,19 @@ makeBlipp() {
 }
 
 boxx() {
-cd ~/Box\ Sync/Global\ Departments/Delivery/Dev\ Projects/tanner/
-pwd
+	cd ~/Box\ Sync/Global\ Departments/Production/Dev\ Projects/tanner/
+	pwd
 }
 
-# USE: desktop
-#      desktop subfolder
-function desktop {
-  cd /Users/$USER/Desktop/$@
+tel() {
+	local ipaddress=$1;
+	if [[ -z $ipaddress ]]; then
+       echo "empty address";
+   	fi
+   	telnet 10.135.140.$ipaddress 23
+   	# echo ip is 10.135.140.$ipaddress
 }
 
-# A function to easily grep for a matching process
-# USE: psg postgres
-function psg {
-  FIRST=`echo $1 | sed -e 's/^\(.\).*/\1/'`
-  REST=`echo $1 | sed -e 's/^.\(.*\)/\1/'`
-  ps aux | grep "[$FIRST]$REST"
-}
 
 # A function to extract correctly any archive based on extension
 # USE: extract imazip.zip
@@ -186,6 +111,9 @@ function extract () {
   # LS
   alias l='ls -lah'
   alias lsp='sudo lsof -i -n -P | grep LISTEN'
+  alias ls='ls -G'
+  export CLICOLOR=1
+  export LSCOLORS=Gxfxcxdxbxegedabagacad
 
   # Git
   alias gcl="git clone"
@@ -234,7 +162,3 @@ export PATH=/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH
   unset file
 # export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-
-
-# // IMGCAT ////////////////////////
