@@ -13,10 +13,13 @@ if tput setaf 1 &> /dev/null; then
   tput sgr0
   if [[ $(tput colors) -ge 256 ]] 2>/dev/null; then
     # Changed these colors to fit Solarized theme
+    BASE00=$(tput setaf 241)
     MAGENTA=$(tput setaf 125)
     ORANGE=$(tput setaf 166)
+    YELLOW=$(tput setaf 136)
     GREEN=$(tput setaf 64)
     PURPLE=$(tput setaf 61)
+    CYAN=$(tput setaf 37)
     WHITE=$(tput setaf 244)
   else
     MAGENTA=$(tput setaf 5)
@@ -55,5 +58,5 @@ function parse_git_branch() {
 
 
 
-export PS1="$GREEN\]¯\_(ツ)_/¯ \[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h \[$WHITE\]in \[$GREEN\]\W\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[\033[0;31m\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
+export PS1="$GREEN\]¯\_(ツ)_/¯ \[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$YELLOW\]\h \[$WHITE\]in \[$CYAN\]\W\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[\033[0;31m\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
 export PS2="\[$ORANGE\]→ \[$RESET\]"
