@@ -127,6 +127,8 @@ function extract () {
   alias gba="git branch -a"
   alias gcam="git commit -am"
   alias gbb="git branch -b"
+  
+  alias speedtest='curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 
 # Case-Insensitive Auto Completion
   bind "set completion-ignore-case on"
